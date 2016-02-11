@@ -83,6 +83,15 @@ $(document).ready(function () {
             filesData.sort(function (fileA, fileB) {
                 return fileA.name.toLowerCase().localeCompare(fileB.name.toLowerCase());
             });
+
+        } else if (sortBy === "size") {
+            console.log("sort by size");
+
+            filesData.sort(function (fileA, fileB) {
+                var sizeA = fileA.rawSize ? fileA.rawSize : Number.MIN_VALUE;
+                var sizeB = fileB.rawSize ? fileB.rawSize : Number.MIN_VALUE;
+                return sizeA - sizeB;
+            });
         }
 
         fileListElement.empty();
@@ -114,11 +123,19 @@ $(document).ready(function () {
 
         $.ajax({
             url: filesBaseUrl + path,
+
+            dataType: "json",
+
             success: function (filesData) {
 
+                // fix sizes and dates
                 filesData.map(function (fileData) {
                     fileData.mtime = new Date(fileData.mtime);
-                    fileData.size = fileData.size ? fileSize(fileData.size) : null;
+
+                    if (fileData.size) {
+                        fileData.rawSize = fileData.size;
+                        fileData.size = fileSize(fileData.size);
+                    }
 
                     return fileData;
                 });
@@ -131,28 +148,36 @@ $(document).ready(function () {
                         renderFileList(filesData, path);
                     });
 
-                if (history.replaceState) {
-                    // IE10, Firefox, Chrome, etc.
-                    console.log("replaceState", path);
-                    history.replaceState(null, path, '#' + path);
+                console.log("replaceState", path);
+                history.replaceState(null, path, '#' + path);
 
-                } else {
-                    // IE9, IE8, etc
-                    console.log("change hash", path);
-                    window.location.hash = '#!' + path;
-                }
 
                 isNavigating = false;
+            },
+
+            error: function (jqxhr, textStatus, errorThrown) {
+                console.log(jqxhr, textStatus, errorThrown);
+
+                if(textStatus === "timeout") {
+                    alert("Request to server timed out, retry later!");
+
+                } else if(textStatus === "abort") {
+                    alert("Connection to server has been aborted, retry later!");
+
+                } else if(textStatus === "parsererror") {
+                    alert("Invalid response from server!");
+
+                } else if(jqxhr.status === 404) {
+                    alert("Server cant find this file/directory!");
+
+                } else {
+                    // also if(textStatus === "error")
+                    alert("Something went wrong in communication to server, retry later!");
+                }
+
+                history.back();
             }
         });
-    }
-
-    function sizeOf(bytes) {
-        if (bytes == 0) {
-            return "0.00 B";
-        }
-        var e = Math.floor(Math.log(bytes) / Math.log(1024));
-        return (bytes / Math.pow(1024, e)).toFixed(2) + ' ' + ' KMGTP'.charAt(e) + 'B';
     }
 
     function fileSize(bytes) {
@@ -177,13 +202,11 @@ $(document).ready(function () {
         navigateTo(startPath);
     }
 
-    if (history.replaceState) {
-        window.onpopstate = function () {
-            if (!isNavigating) {
-                navigateToUrlLocation();
-            }
-        };
-    }
+    window.onpopstate = function () {
+        if (!isNavigating) {
+            navigateToUrlLocation();
+        }
+    };
 
     navigateToUrlLocation();
 });

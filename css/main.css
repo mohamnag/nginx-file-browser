@@ -10,7 +10,7 @@ a {
 .list-sort {
     background: #ddd;
     border-radius: 1rem;
-    padding: .5rem 2rem;
+    padding: 1.5rem 2rem .5rem;
 }
 
 .list-sort label {
