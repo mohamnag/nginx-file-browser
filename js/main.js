@@ -76,6 +76,14 @@ $(document).ready(function () {
             url: filesBaseUrl + path,
             success: function (filesData) {
 
+                filesData.map(function (fileData) {
+                    return fileData.mtime = new Date(fileData.mtime);
+                });
+
+                filesData.sort(function (fileA, fileB) {
+                    return fileB.mtime.getTime() - fileA.mtime.getTime();
+                });
+
                 fileListElement.empty();
 
                 var parentDir = getParentDir(path);
