@@ -22,19 +22,17 @@ $(document).ready(function () {
             fileItemElement.find(".file-date").text(moment(fileDate).fromNow());
         }
 
-        if (fileType === "directory") {
-            if (fileName === "..") {
-                // navigate to parent dir
-                fileItemElement.find(".file-link").click(function () {
-                    navigateTo(directory);
-                });
+        if (fileType === "parent") {
+            // navigate to parent dir
+            fileItemElement.find(".file-link").click(function () {
+                navigateTo(directory);
+            });
 
-            } else {
-                // navigate to sub dir
-                fileItemElement.find(".file-link").click(function () {
-                    navigateTo(directory + fileName + "/");
-                });
-            }
+        } else if (fileType === "directory") {
+            // navigate to sub dir
+            fileItemElement.find(".file-link").click(function () {
+                navigateTo(directory + fileName + "/");
+            });
 
         } else if (fileType === "other") {
             // nginx returns symlinks as type other,
@@ -95,7 +93,7 @@ $(document).ready(function () {
             fileListElement.append(renderFileElement(
                 parentDir,
                 "..",
-                "directory"
+                "parent"
             ));
         }
 
@@ -119,7 +117,10 @@ $(document).ready(function () {
             success: function (filesData) {
 
                 filesData.map(function (fileData) {
-                    return fileData.mtime = new Date(fileData.mtime);
+                    fileData.mtime = new Date(fileData.mtime);
+                    fileData.size = fileData.size ? fileSize(fileData.size) : null;
+
+                    return fileData;
                 });
 
                 renderFileList(filesData, path);
@@ -146,6 +147,28 @@ $(document).ready(function () {
         });
     }
 
+    function sizeOf(bytes) {
+        if (bytes == 0) {
+            return "0.00 B";
+        }
+        var e = Math.floor(Math.log(bytes) / Math.log(1024));
+        return (bytes / Math.pow(1024, e)).toFixed(2) + ' ' + ' KMGTP'.charAt(e) + 'B';
+    }
+
+    function fileSize(bytes) {
+        var exp = Math.log(bytes) / Math.log(1024) | 0;
+        var value = bytes / Math.pow(1024, exp);
+
+        if (exp == 0) {
+            return value.toFixed(0) + ' bytes';
+
+        } else {
+            var result = value.toFixed(2);
+            return result + ' ' + 'KMGTPEZY'[exp - 1] + 'B';
+        }
+
+    }
+
     var isNavigating = false;
 
     function navigateToUrlLocation() {
@@ -156,7 +179,7 @@ $(document).ready(function () {
 
     if (history.replaceState) {
         window.onpopstate = function () {
-            if(!isNavigating) {
+            if (!isNavigating) {
                 navigateToUrlLocation();
             }
         };

@@ -31,7 +31,6 @@ a {
     display: inline-block;
     position: relative;
     padding-left: 4rem;
-    min-width: 70%;
 }
 
 .file-list .file-name::before {
@@ -59,14 +58,42 @@ a {
     background-image: url(../image/other.png);
 }
 
+.file-list .parent .file-name::before {
+    background-image: url(../image/parent.png);
+}
+
 .file-list .file-link {
 
 }
 
 .file-list .file-date {
+    padding: .25rem .5rem;
+    background: #1EAEDB;
+    border-radius: .5rem;
+    font-size: 70%;
+    margin: 0 .5rem;
+    color: #fff;
+}
 
+.file-list .directory .file-date {
+}
+
+.file-list .parent .file-date {
+    display: none;
 }
 
 .file-list .file-size {
-
+    padding: .25rem .5rem;
+    background: #24db53;
+    border-radius: .5rem;
+    font-size: 70%;
+    margin: 0 .5rem;
+    color: #fff;
 }
+
+.file-list .other .file-size,
+.file-list .parent .file-size,
+.file-list .directory .file-size {
+    display: none;
+}
+
