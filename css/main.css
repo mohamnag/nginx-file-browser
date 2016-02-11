@@ -7,6 +7,17 @@ a {
     text-decoration: none;
 }
 
+.list-sort {
+    background: #ddd;
+    border-radius: 1rem;
+    padding: .5rem 2rem;
+}
+
+.list-sort label {
+    display: inline-block;
+    margin: 0 1rem 0 0;
+}
+
 .file-list {
     list-style: none;
 }

@@ -69,6 +69,47 @@ $(document).ready(function () {
         return parentDir;
     }
 
+    function renderFileList(filesData, path) {
+
+        var sortBy = $('input[name=sort]:checked').val();
+        if (sortBy === "date") {
+            console.log("sort by date");
+
+            filesData.sort(function (fileA, fileB) {
+                return fileB.mtime.getTime() - fileA.mtime.getTime();
+            });
+
+        } else if (sortBy === "name") {
+            console.log("sort by name");
+
+            filesData.sort(function (fileA, fileB) {
+                return fileA.name.toLowerCase().localeCompare(fileB.name.toLowerCase());
+            });
+        }
+
+        fileListElement.empty();
+
+        var parentDir = getParentDir(path);
+
+        if (parentDir) {
+            fileListElement.append(renderFileElement(
+                parentDir,
+                "..",
+                "directory"
+            ));
+        }
+
+        filesData.forEach(function (fileData) {
+            fileListElement.append(renderFileElement(
+                path,
+                fileData.name,
+                fileData.type,
+                fileData.size,
+                fileData.mtime
+            ));
+        });
+    }
+
     function navigateTo(path) {
         console.log("navigateTo", path);
 
@@ -80,32 +121,13 @@ $(document).ready(function () {
                     return fileData.mtime = new Date(fileData.mtime);
                 });
 
-                filesData.sort(function (fileA, fileB) {
-                    return fileB.mtime.getTime() - fileA.mtime.getTime();
-                });
+                renderFileList(filesData, path);
 
-                fileListElement.empty();
-
-                var parentDir = getParentDir(path);
-
-                if (parentDir) {
-                    fileListElement.append(renderFileElement(
-                        parentDir,
-                        "..",
-                        "directory"
-                    ));
-                }
-
-                filesData.forEach(function (fileData) {
-                    fileListElement.append(renderFileElement(
-                        path,
-                        fileData.name,
-                        fileData.type,
-                        fileData.size,
-                        fileData.mtime
-                    ));
-                });
-
+                $('input[name=sort]')
+                    .unbind("change")
+                    .on("change", function () {
+                        renderFileList(filesData, path);
+                    });
             }
         });
     }
