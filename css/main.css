@@ -1,0 +1,61 @@
+
+body > .container:first-child {
+    margin: 3rem auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+.file-list {
+    list-style: none;
+}
+
+.file-list li {
+    margin: 1rem 0;
+}
+
+.file-list .file-name {
+    line-height: 4rem;
+    display: inline-block;
+    position: relative;
+    padding-left: 4rem;
+    min-width: 70%;
+}
+
+.file-list .file-name::before {
+    background: no-repeat center center;
+    background-size: contain;
+    width: 3rem;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.file-list .directory .file-name::before {
+    background-image: url(../image/directory.png);
+
+}
+
+.file-list .file .file-name::before {
+    background-image: url(../image/file.png);
+}
+
+.file-list .other .file-name::before {
+    background-image: url(../image/other.png);
+}
+
+.file-list .file-link {
+
+}
+
+.file-list .file-date {
+
+}
+
+.file-list .file-size {
+
+}
