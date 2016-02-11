@@ -46,7 +46,7 @@ $(document).ready(function () {
         } else {
             // just file dl
             fileItemElement.find(".file-link")
-                .attr("href", directory + fileName)
+                .attr("href", filesBaseUrl + directory + fileName)
                 .attr("target", "_blank");
         }
 
@@ -112,6 +112,7 @@ $(document).ready(function () {
 
     function navigateTo(path) {
         console.log("navigateTo", path);
+        isNavigating = true;
 
         $.ajax({
             url: filesBaseUrl + path,
@@ -128,10 +129,38 @@ $(document).ready(function () {
                     .on("change", function () {
                         renderFileList(filesData, path);
                     });
+
+                if (history.replaceState) {
+                    // IE10, Firefox, Chrome, etc.
+                    console.log("replaceState", path);
+                    history.replaceState(null, path, '#' + path);
+
+                } else {
+                    // IE9, IE8, etc
+                    console.log("change hash", path);
+                    window.location.hash = '#!' + path;
+                }
+
+                isNavigating = false;
             }
         });
     }
 
-    navigateTo("/");
+    var isNavigating = false;
 
+    function navigateToUrlLocation() {
+        var requestedPath = window.location.hash;
+        var startPath = requestedPath ? requestedPath.substr(1) : "/";
+        navigateTo(startPath);
+    }
+
+    if (history.replaceState) {
+        window.onpopstate = function () {
+            if(!isNavigating) {
+                navigateToUrlLocation();
+            }
+        };
+    }
+
+    navigateToUrlLocation();
 });
