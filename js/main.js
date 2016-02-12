@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
 
-    var filesBaseUrl = "/files";
+    var filesBaseUrl = "http://192.168.1.64:30080/files";
 
     var fileListElement = $("#file-list");
     var fileItemElementTemplate = fileListElement.find("li").detach();

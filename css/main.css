@@ -1,6 +1,6 @@
 
 body > .container:first-child {
-    margin: 3rem auto;
+    margin: 3rem auto 0;
 }
 
 a {
@@ -97,3 +97,10 @@ a {
     display: none;
 }
 
+footer {
+    text-align: center;
+}
+
+footer small + small {
+    margin-left: 2rem;
+}
