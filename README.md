@@ -2,6 +2,8 @@
 This web application is a very simple file browser which can be used
 effectively together with [nginx's autoindex module](http://nginx.org/en/docs/http/ngx_http_autoindex_module.html).
 
+![nginx file browser in action](assets/screen-shot-1.jpg)
+
 A sample nginx configuration is also included.
 
 Mainly for demonstration purposes a docker image is also available [here](https://hub.docker.com/r/mohamnag/nginx-file-browser/).
