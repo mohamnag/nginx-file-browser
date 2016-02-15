@@ -1,4 +1,13 @@
 /**
+ * Copyright (c) Mohammad Naghavi <mohamnag@gmail.com>
+ *
+ * Licenced as stated by LICENSE file under root of this code.
+ *
+ * * NOTICE:
+ *      If your nginx config varies from the default config
+ *      provided in this code, you probably need to change
+ *      value of filesBaseUrl on top of this module too.
+ *
  * Created by mohamnag on 11/02/16.
  */
 
