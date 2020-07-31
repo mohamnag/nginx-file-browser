@@ -1,0 +1,6 @@
+LICENSE
+*.md
+Makefile
+Dockerfile
+.git
+.gitignore
