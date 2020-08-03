@@ -1,7 +1,5 @@
 FROM nginx
 
-MAINTAINER Mohammad Naghavi <mohamnag@gmail.com>
-
 ADD default.conf /etc/nginx/conf.d/default.conf
 ADD css/ /opt/www/file-browser/css/
 ADD image/ /opt/www/file-browser/image/

@@ -28,7 +28,7 @@ $(document).ready(function () {
         fileItemElement.find(".file-name").text(fileName);
 
         if (fileDate) {
-            fileItemElement.find(".file-date").text(moment(fileDate).fromNow());
+            fileItemElement.find(".file-date").text(fileDate);
         }
 
         if (fileType === "parent") {
