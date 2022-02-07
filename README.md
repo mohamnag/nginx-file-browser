@@ -3,7 +3,8 @@
 This web application is a very simple file browser which can be used
 effectively together with [nginx's autoindex module](http://nginx.org/en/docs/http/ngx_http_autoindex_module.html).
 
-![nginx file browser in action](assets/Screen-Shot-1.jpg)
+![nginx file browser in action - light theme](assets/screenshot-light.jpg)
+![nginx file browser in action - light theme](assets/screenshot-dark.jpg)
 
 A sample nginx configuration is also included which mounts **file browser** under root (`/`) and mounts files to be listed under `/files` path. Hence is the `filesBaseUrl` under
 
@@ -40,8 +41,3 @@ shall be changed to
 ```
 
 And the mounting point is now `/home/myuser/files-to-serve/` instead of `/opt/www/files/`.
-
-## Gruvbox theme
-
-A gruvbox theme is present in the css. You can use it by editing line 12 of the index.html. Simply change the link from `css/main.css` to `css/main-gruvbox.css`
-This theme is heavily inspired from iTerm2 color scheme that can be found here: [link](https://github.com/herrbischoff/iterm2-gruvbox)

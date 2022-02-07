@@ -7,15 +7,19 @@ a {
     text-decoration: none;
 }
 
-.list-sort {
+.controls {
     background: #ddd;
     border-radius: 1rem;
     padding: 1.5rem 2rem .5rem;
 }
 
-.list-sort label {
+.controls span:not(:first-of-type) {
+    padding-left: 4rem;
+}
+
+.controls label {
     display: inline-block;
-    margin: 0 1rem 0 0;
+    margin: 0 0 0 .5rem;
 }
 
 .file-list {
@@ -103,4 +107,44 @@ footer {
 
 footer small + small {
     margin-left: 2rem;
+}
+
+/*
+    Start of alternations for dark theme
+*/
+
+body.dark {
+    background-color: #252525;
+    color: #ecdbb2;
+}
+
+body.dark h1 {
+    color: #9dd08e;
+}
+
+body.dark a {
+    color: #549699;
+}
+
+body.dark a.file-name {
+    color: #ecdbb2;
+}
+
+body.dark .controls {
+    background: #413e3d;
+    color: #ecdbb2;
+}
+
+body.dark input[name="sort"] {
+    accent-color: #fe6142;
+}
+
+body.dark .file-list .file-date {
+    background: #549699;
+    color: #ecdbb2;
+}
+
+body.dark .file-list .file-size {
+    background: #79aa7d;
+    color: #ecdbb2;
 }

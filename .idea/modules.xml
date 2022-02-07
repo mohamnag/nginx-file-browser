@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/file-browser.iml" filepath="$PROJECT_DIR$/.idea/file-browser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nginx-file-browser.iml" filepath="$PROJECT_DIR$/nginx-file-browser.iml" />
     </modules>
   </component>
 </project>
