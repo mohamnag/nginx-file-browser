@@ -45,3 +45,6 @@ And the mounting point is now `/home/myuser/files-to-serve/` instead of `/opt/ww
 
 A gruvbox theme is present in the css. You can use it by editing line 12 of the index.html. Simply change the link from `css/main.css` to `css/main-gruvbox.css`
 This theme is heavily inspired from iTerm2 color scheme that can be found here: [link](https://github.com/herrbischoff/iterm2-gruvbox)
+
+Here is a sneak peak of what it looks like:
+![gruvbox theme screenshort](https://github.com/[mohamnag]/[nginx-file-browser]/blob/[master]/miscs/gruvbox_screenshot.png?raw=true)
