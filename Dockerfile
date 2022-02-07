@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:alpine
 
 MAINTAINER Mohammad Naghavi <mohamnag@gmail.com>
 

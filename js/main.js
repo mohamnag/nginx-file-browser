@@ -6,19 +6,24 @@
  * * NOTICE:
  *      If your nginx config varies from the default config
  *      provided in this code, you probably need to change
- *      value of filesBaseUrl on top of this module too.
+ *      value of filesBaseUrl here too.
  *
  * Created by mohamnag on 11/02/16.
  */
 
-
-
 $(document).ready(function () {
 
-    var filesBaseUrl = "/files";
+    function applyTheme() {
+        var theme = $('input[name=theme]:checked').val()
 
-    var fileListElement = $("#file-list");
-    var fileItemElementTemplate = fileListElement.find("li").detach();
+        console.log(`setting theme to '${theme}'`)
+
+        $('body')
+            .removeClass()
+            .addClass(theme)
+
+        localStorage.setItem("theme", theme)
+    }
 
     function renderFileElement(directory, fileName, fileType, fileSize, fileDate) {
 
@@ -203,13 +208,25 @@ $(document).ready(function () {
 
     }
 
-    var isNavigating = false;
-
     function navigateToUrlLocation() {
         var requestedPath = window.location.hash;
         var startPath = requestedPath ? requestedPath.substr(1) : "/";
         navigateTo(startPath);
     }
+
+    var filesBaseUrl = "/files";
+    var isNavigating = false;
+    var fileListElement = $("#file-list");
+    var fileItemElementTemplate = fileListElement.find("li").detach();
+
+    // setup theme switching
+    $('input[name=theme]').on("change", applyTheme);
+
+    // apply current theme
+    var theme = localStorage.getItem("theme")
+    console.log(`theme '${theme}' loaded`)
+    $(`input[name=theme][value='${theme}']`).prop('checked', true)
+    applyTheme()
 
     window.onpopstate = function () {
         if (!isNavigating) {

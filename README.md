@@ -3,7 +3,8 @@
 This web application is a very simple file browser which can be used
 effectively together with [nginx's autoindex module](http://nginx.org/en/docs/http/ngx_http_autoindex_module.html).
 
-![nginx file browser in action](assets/Screen-Shot-1.jpg)
+![nginx file browser in action - light theme](assets/screenshot-light.jpg)
+![nginx file browser in action - light theme](assets/screenshot-dark.jpg)
 
 A sample nginx configuration is also included which mounts **file browser** under root (`/`) and mounts files to be listed under `/files` path. Hence is the `filesBaseUrl` under
 
