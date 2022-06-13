@@ -12,11 +12,16 @@ A sample nginx configuration is also included which mounts **file browser** unde
 
 Mainly for demonstration purposes a docker image is also available [here](https://hub.docker.com/r/mohamnag/nginx-file-browser/).
 In order to use this docker image, the volume which has to be served should
-be mounted under `/opt/www/files/` and port `80` of container shall be mapped
+be mounted under `/opt/www/files/` and port `80` (root) or `8080` (rootless)) of container shall be mapped
 to a proper port on host. A proper run would look like:
 
+root
 ```
 $ docker run -p 8080:80 -v /path/to/my/files/:/opt/www/files/ mohamnag/nginx-file-browser
+```
+rootless:
+```
+$ docker run -p 8080:8080 -v /path/to/my/files/:/opt/www/files/ mohamnag/nginx-file-browser
 ```
 
 With container up and running you can point your browser to IP of docker host with given port to view the files. For example with above run command assuming docker host having IP with `192.168.0.200` we have to navigate to this URL:
